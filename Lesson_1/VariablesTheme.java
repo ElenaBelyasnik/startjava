@@ -63,9 +63,9 @@ public class VariablesTheme {
         System.out.println("Новые значения переменных: n1 = " + num1 + " n2 = " + num2);
         System.out.println("с помощью побитовой операции ^");
         System.out.println("Исходные значения переменных: n1 = " + num1 + " n2 = " + num2);
-        num1 = num1 ^ num2;
-        num2 = num2 ^ num1;
-        num1 = num1 ^ num2;
+        num1 ^= num2;
+        num2 ^= num1;
+        num1 ^= num2;
         System.out.println("Новые значения переменных: n1 = " + num1 + " n2 = " + num2);
 
         System.out.println("\n6. Вывод символов и их кодов");
@@ -81,16 +81,16 @@ public class VariablesTheme {
         System.out.println(underScore + "   " + (byte) underScore);
 
         System.out.println("\n7. Вывод в консоль ASCII-арт Дюка");
-        char c1 = '/';
-        char c2 = '\\';
-        char c3 = '_';
-        char c4 = '(';
-        char c5 = ')';
-        System.out.println("    " + c1 + c2);
-        System.out.println("   " + c1 + "  " + c2);
-        System.out.println("  " + c1 + c3 + c4 + " " + c5 + c2);
-        System.out.println(" " + c1 + "      " + c2);
-        System.out.println("" + c1 + c3 + c3 + c3 + c3 + c1 + c2 + c3 + c3 + c2);
+        char forwardSlash = '/';
+        char backSlash = '\\';
+        char leftParentheses = '(';
+        char rightParentheses = ')';
+        System.out.println("    " + forwardSlash + backSlash);
+        System.out.println("   " + forwardSlash + "  " + backSlash);
+        System.out.println("  " + forwardSlash + underScore + leftParentheses + " " + rightParentheses + backSlash);
+        System.out.println(" " + forwardSlash + "      " + backSlash);
+        System.out.println("" + forwardSlash + underScore + underScore + underScore + underScore + forwardSlash +
+                backSlash + underScore + underScore + backSlash);
 
         System.out.println("\n8. Вывод количества сотен, десятков и единиц числа");
         int num = 523;
