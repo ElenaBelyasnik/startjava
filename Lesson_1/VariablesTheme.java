@@ -9,7 +9,7 @@ public class VariablesTheme {
         float cpuFrequency = 2.1f;
         double cpuSpeed = 1.97;
         char diskDriveName = 'C';
-        boolean availabilityOfWiFi = true;
+        boolean availableWifi = true;
         System.out.println(ramSize + " - " + "размер оперативной памяти");
         System.out.println(cpuCoreNum + " - " + "количество ядер процессора");
         System.out.println(diskDriveCapacity + " - " + "ёмкость дискового накопителя");
@@ -17,7 +17,7 @@ public class VariablesTheme {
         System.out.println(cpuFrequency + " - " + "частота процессора");
         System.out.println(cpuSpeed + " - " + "скорость ЦПУ");
         System.out.println(diskDriveName + " - " + "название дискового накопителя");
-        System.out.println(availabilityOfWiFi + " - " + "наличие wi-fi");
+        System.out.println(availableWifi + " - " + "наличие wi-fi");
 
         System.out.println("\n2. Расчет стоимости товара со скидкой");
         int penPrise = 100;
@@ -81,15 +81,15 @@ public class VariablesTheme {
         System.out.println(underScore + "   " + (byte) underScore);
 
         System.out.println("\n7. Вывод в консоль ASCII-арт Дюка");
-        char forwardSlash = '/';
+        char slash = '/';
         char backSlash = '\\';
         char leftParentheses = '(';
         char rightParentheses = ')';
-        System.out.println("    " + forwardSlash + backSlash);
-        System.out.println("   " + forwardSlash + "  " + backSlash);
-        System.out.println("  " + forwardSlash + underScore + leftParentheses + " " + rightParentheses + backSlash);
-        System.out.println(" " + forwardSlash + "      " + backSlash);
-        System.out.println("" + forwardSlash + underScore + underScore + underScore + underScore + forwardSlash +
+        System.out.println("    " + slash + backSlash);
+        System.out.println("   " + slash + "  " + backSlash);
+        System.out.println("  " + slash + underScore + leftParentheses + " " + rightParentheses + backSlash);
+        System.out.println(" " + slash + "      " + backSlash);
+        System.out.println("" + slash + underScore + underScore + underScore + underScore + slash +
                 backSlash + underScore + underScore + backSlash);
 
         System.out.println("\n8. Вывод количества сотен, десятков и единиц числа");

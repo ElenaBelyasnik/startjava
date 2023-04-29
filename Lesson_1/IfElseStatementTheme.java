@@ -45,47 +45,44 @@ public class IfElseStatementTheme {
         System.out.println("Исходное число = " + num);
         if (num != 0) {
             if (num % 2 == 0) {
-                if (num > 0) {
-                    System.out.println("Чётное, положительное");
-                } else {
-                    System.out.println("Чётное, отрицательное");
-                }
-            } else if (num % 2 != 0) {
-                if (num > 0) {
-                    System.out.println("Нечётное, положительное");
-                } else {
-                    System.out.println("Нечётное, отрицательное");
-                }
+                System.out.print("Чётное, ");
+            } else {
+                System.out.print("Нечётное, ");
+            }
+            if (num > 0) {
+                System.out.println("положительное");
+            } else {
+                System.out.println("отрицательное");
             }
         } else {
-            System.out.println("Ноль");
+            System.out.println(num);
         }
 
         System.out.println("\n4. Поиск одинаковых цифр в числах");
-        int num1 = 233;
+        int num1 = 433;
         int num2 = 233;
         System.out.println("Исходные числа: " + num1 + " и " + num2);
-        int figure1 = num1 / 100;
-        int figure2 = num2 / 100;
+        int hundreds1 = num1 / 100;
+        int hundreds2 = num2 / 100;
+        int tens1 = num1 % 100 / 10;
+        int tens2 = num2 % 100 / 10;
+        int ones1 = num1 % 10;
+        int ones2 = num2 % 10;
+        boolean isHundredsMatch = hundreds1 == hundreds2;
+        boolean isTensMatch = tens1 == tens2;
+        boolean isOnesMatch = ones1 == ones2;
+        boolean noEqualNumbers = !isHundredsMatch & !isTensMatch & !isOnesMatch;
         // если все цифры в разрядах разные, то остальные проверки выполняться не должны
-        if (figure1 == figure2) {
-            System.out.println("Цифра " + figure1 + " совпадает в третьем разряде");
-            figure1 = num1 % 100 / 10;
-            figure2 = num2 % 100 / 10;
-            if (figure1 == figure2) {
-                System.out.println("Цифра " + figure1 + " совпадает во втором разряде");
-                figure1 = num1 % 10;
-                figure2 = num2 % 10;
-                if (figure1 == figure2) {
-                    System.out.println("Цифра " + figure1 + " совпадает в первом разряде");
-                } else {
-                    System.out.println("Равных цифр в первом разряде нет.");
+        if (noEqualNumbers) {
+            System.out.println("Равных цифр нет.");
+        } else if (isHundredsMatch) {
+            System.out.println("Цифра " + hundreds1 + " совпадает в третьем разряде");
+            if (isTensMatch) {
+                System.out.println("Цифра " + tens1 + " совпадает во втором разряде");
+                if (isOnesMatch) {
+                    System.out.println("Цифра " + ones2 + " совпадает в первом разряде");
                 }
-            } else {
-                System.out.println("Равных цифр во втором разряде нет. Остальные проверки не выполняем.");
             }
-        } else {
-            System.out.println("Равных цифр в третьем разряде нет. Остальные проверки не выполняем.");
         }
 
         System.out.println("\n5. Определение символа по его коду");
@@ -115,13 +112,13 @@ public class IfElseStatementTheme {
         System.out.println("Итоговая сумма = " + (depositAmount + accruedInterest));
 
         System.out.println("\n7. Определение оценки по предметам");
-        int historyProc = 59;
+        int historyPercentage = 59;
         int historyGrade = 2;
-        if (historyProc > 60 & historyProc <= 73) {
+        if (historyPercentage > 60 & historyPercentage <= 73) {
             historyGrade = 3;
-        } else if (historyProc > 73 & historyProc <= 91) {
+        } else if (historyPercentage > 73 & historyPercentage <= 91) {
             historyGrade = 4;
-        } else if (historyProc > 91) {
+        } else if (historyPercentage > 91) {
             historyGrade = 5;
         }
         int programmingProc = 91;
@@ -136,7 +133,7 @@ public class IfElseStatementTheme {
         System.out.println(historyGrade + " - история");
         System.out.println(programmingGrade + " - программирование");
         System.out.println("Средний балл оценок по предметам = " + ((historyGrade + programmingGrade) / 2));
-        System.out.println("Средний % по предметам = " + ((historyProc + programmingProc) / 2));
+        System.out.println("Средний % по предметам = " + ((historyPercentage + programmingProc) / 2));
 
         System.out.println("\n8. Расчет прибыли за год");
         int rent = 5_000;
@@ -150,50 +147,40 @@ public class IfElseStatementTheme {
         }
 
         System.out.println("\n9. Подсчет количества банкнот");
-        // исходное количество банкнот номиналом 100
-        int nominal100 = 5;
-        // исходное количество банкнот номиналом 10
-        int nominal10 = 5;
-        // исходное количество банкнот номиналом 1
-        int nominal1 = 50;
-        int usdAmount = 567;
-        // промежуточное значение суммы для погашения.
-        int currentUsdAmount = usdAmount;
-        // если денег в банкомате недостаточно
-        if (usdAmount > (nominal100 * 100 + nominal10 * 10 + nominal1)) {
+        int initialNumber100USDBills = 5;
+        int initialNumber10USDBills = 5;
+        int initialNumber1USDBills = 50;
+        int requiredUSDAmount = 567;
+        int wholeUSDAmountInATM = initialNumber100USDBills * 100 + initialNumber10USDBills * 10 + initialNumber1USDBills;
+        System.out.println("Сумма к выдаче в USD: " + requiredUSDAmount);
+        if (requiredUSDAmount > wholeUSDAmountInATM) {
             System.out.println("Недостаточно денег в банкомате");
         } else {
-            // сколько понадобилось 100-долларовых банкнот
-            int notes100 = 0;
-            // сколько понадобилось 10-долларовых банкнот
-            int notes10 = 0;
-            // сколько понадобилось 1-долларовых банкнот
-            int notes1 = 0;
-            // промежуточное количество банкнот номиналом 100
-            int currentNominal100 = nominal100;
-            // промежуточное количество банкнот номиналом 10
-            int currentNominal10 = nominal10;
-            // промежуточное количество банкнот номиналом 1
-            int currentNominal1 = nominal1;
+            int howMuchItTook100USDBills = 0;
+            int howMuchItTook10USDBills = 0;
+            int howMuchItTook1USDBills = 0;
+            int currentNominal100 = initialNumber100USDBills;
+            int currentNominal10 = initialNumber10USDBills;
+            int currentNominal1 = initialNumber1USDBills;
+            int currentUsdAmount = requiredUSDAmount;
             while (currentUsdAmount > 99 & currentNominal100 > 0) {
-                notes100 += 1;
+                howMuchItTook100USDBills += 1;
                 currentNominal100 -= 1;
                 currentUsdAmount -= 100;
             }
             while (currentUsdAmount > 9 & currentNominal10 > 0) {
-                notes10 += 1;
+                howMuchItTook10USDBills += 1;
                 currentNominal10 -= 1;
                 currentUsdAmount -= 10;
             }
             while (currentUsdAmount > 0 & currentNominal1 > 0) {
-                notes1 += 1;
+                howMuchItTook1USDBills += 1;
                 currentNominal1 -= 1;
                 currentUsdAmount -= 1;
             }
-            System.out.println("Сумма к выдаче в USD: " + usdAmount);
-            System.out.println("Банкнот номиналом 100 USD: " + notes100);
-            System.out.println("Банкнот номиналом 10 USD: " + notes10);
-            System.out.println("Банкнот номиналом 1 USD: " + notes1);
+            System.out.println("Банкнот номиналом 100 USD: " + howMuchItTook100USDBills);
+            System.out.println("Банкнот номиналом 10 USD: " + howMuchItTook10USDBills);
+            System.out.println("Банкнот номиналом 1 USD: " + howMuchItTook1USDBills);
         }
     }
 }
