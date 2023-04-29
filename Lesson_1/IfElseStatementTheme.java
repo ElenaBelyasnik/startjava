@@ -147,40 +147,29 @@ public class IfElseStatementTheme {
         }
 
         System.out.println("\n9. Подсчет количества банкнот");
-        int initialNumber100USDBills = 5;
-        int initialNumber10USDBills = 5;
-        int initialNumber1USDBills = 50;
+        int usd100InAtm = 5;
+        int usd10InAtm = 5;
+        int usd1InAtm = 50;
         int requiredUSDAmount = 567;
-        int wholeUSDAmountInATM = initialNumber100USDBills * 100 + initialNumber10USDBills * 10 + initialNumber1USDBills;
+        int totalUSDAmountInATM = usd100InAtm * 100 + usd10InAtm * 10 + usd1InAtm;
         System.out.println("Сумма к выдаче в USD: " + requiredUSDAmount);
-        if (requiredUSDAmount > wholeUSDAmountInATM) {
+        if (requiredUSDAmount > totalUSDAmountInATM) {
             System.out.println("Недостаточно денег в банкомате");
         } else {
-            int howMuchItTook100USDBills = 0;
-            int howMuchItTook10USDBills = 0;
-            int howMuchItTook1USDBills = 0;
-            int currentNominal100 = initialNumber100USDBills;
-            int currentNominal10 = initialNumber10USDBills;
-            int currentNominal1 = initialNumber1USDBills;
-            int currentUsdAmount = requiredUSDAmount;
-            while (currentUsdAmount > 99 & currentNominal100 > 0) {
-                howMuchItTook100USDBills += 1;
-                currentNominal100 -= 1;
-                currentUsdAmount -= 100;
+            int hundredsInAmount = requiredUSDAmount / 100;
+            int tensInAmount = requiredUSDAmount % 100 / 10;
+            int onesInAmount = requiredUSDAmount % 10;
+            if (hundredsInAmount > usd100InAtm) {
+                tensInAmount += (hundredsInAmount - usd100InAtm) * 10;
+                hundredsInAmount = usd1InAtm;
             }
-            while (currentUsdAmount > 9 & currentNominal10 > 0) {
-                howMuchItTook10USDBills += 1;
-                currentNominal10 -= 1;
-                currentUsdAmount -= 10;
+            if (tensInAmount > usd10InAtm){
+                onesInAmount += (tensInAmount - usd10InAtm) * 10;
+                tensInAmount = usd10InAtm;
             }
-            while (currentUsdAmount > 0 & currentNominal1 > 0) {
-                howMuchItTook1USDBills += 1;
-                currentNominal1 -= 1;
-                currentUsdAmount -= 1;
-            }
-            System.out.println("Банкнот номиналом 100 USD: " + howMuchItTook100USDBills);
-            System.out.println("Банкнот номиналом 10 USD: " + howMuchItTook10USDBills);
-            System.out.println("Банкнот номиналом 1 USD: " + howMuchItTook1USDBills);
+            System.out.println("Банкнот номиналом 100 USD: " + hundredsInAmount);
+            System.out.println("Банкнот номиналом 10 USD: " + tensInAmount);
+            System.out.println("Банкнот номиналом 1 USD: " + onesInAmount);
         }
     }
 }
