@@ -59,7 +59,7 @@ public class IfElseStatementTheme {
         }
 
         System.out.println("\n4. Поиск одинаковых цифр в числах");
-        int num1 = 433;
+        int num1 = 423;
         int num2 = 233;
         System.out.println("Исходные числа: " + num1 + " и " + num2);
         int hundreds1 = num1 / 100;
@@ -71,19 +71,22 @@ public class IfElseStatementTheme {
         boolean isHundredsMatch = hundreds1 == hundreds2;
         boolean isTensMatch = tens1 == tens2;
         boolean isOnesMatch = ones1 == ones2;
-        boolean noEqualNumbers = !isHundredsMatch & !isTensMatch & !isOnesMatch;
+        boolean noEqualNumbers = !isHundredsMatch && !isTensMatch && !isOnesMatch;
         // если все цифры в разрядах разные, то остальные проверки выполняться не должны
         if (noEqualNumbers) {
             System.out.println("Равных цифр нет.");
-        } else if (isHundredsMatch) {
-            System.out.println("Цифра " + hundreds1 + " совпадает в третьем разряде");
+        } else {
+            if (isHundredsMatch) {
+                System.out.println("Цифра " + hundreds1 + " совпадает в третьем разряде");
+            }
             if (isTensMatch) {
                 System.out.println("Цифра " + tens1 + " совпадает во втором разряде");
-                if (isOnesMatch) {
-                    System.out.println("Цифра " + ones2 + " совпадает в первом разряде");
-                }
+            }
+            if (isOnesMatch) {
+                System.out.println("Цифра " + ones2 + " совпадает в первом разряде");
             }
         }
+
 
         System.out.println("\n5. Определение символа по его коду");
         char code = '\u0057';
@@ -107,6 +110,7 @@ public class IfElseStatementTheme {
         } else if (depositAmount > 300_000) {
             depositInterest = 0.1;
         }
+
         double accruedInterest = Math.round(depositAmount * depositInterest);
         System.out.println("Начисленный % = " + accruedInterest);
         System.out.println("Итоговая сумма = " + (depositAmount + accruedInterest));
@@ -121,6 +125,7 @@ public class IfElseStatementTheme {
         } else if (historyPercentage > 91) {
             historyGrade = 5;
         }
+
         int programmingProc = 91;
         int programmingGrade = 2;
         if (programmingProc > 60 & programmingProc <= 73) {
@@ -146,24 +151,24 @@ public class IfElseStatementTheme {
             System.out.println("Прибыль за год: " + annualProfit);
         }
 
-        System.out.println("\n9. Подсчет количества банкнот");
-        int usd100InAtm = 5;
+        System.out.println("\n9 Подсчет количества банкнот");
+        int usd100InAtm = 10;
         int usd10InAtm = 5;
         int usd1InAtm = 50;
-        int requiredUSDAmount = 567;
+        int requiredCash = 567;
         int totalUSDAmountInATM = usd100InAtm * 100 + usd10InAtm * 10 + usd1InAtm;
-        System.out.println("Сумма к выдаче в USD: " + requiredUSDAmount);
-        if (requiredUSDAmount > totalUSDAmountInATM) {
+        System.out.println("Сумма к выдаче в USD: " + requiredCash);
+        if (requiredCash > totalUSDAmountInATM) {
             System.out.println("Недостаточно денег в банкомате");
         } else {
-            int hundredsInAmount = requiredUSDAmount / 100;
-            int tensInAmount = requiredUSDAmount % 100 / 10;
-            int onesInAmount = requiredUSDAmount % 10;
+            int hundredsInAmount = requiredCash / 100;
+            int tensInAmount = requiredCash % 100 / 10;
+            int onesInAmount = requiredCash % 10;
             if (hundredsInAmount > usd100InAtm) {
                 tensInAmount += (hundredsInAmount - usd100InAtm) * 10;
-                hundredsInAmount = usd1InAtm;
+                hundredsInAmount = usd100InAtm;
             }
-            if (tensInAmount > usd10InAtm){
+            if (tensInAmount > usd10InAtm) {
                 onesInAmount += (tensInAmount - usd10InAtm) * 10;
                 tensInAmount = usd10InAtm;
             }

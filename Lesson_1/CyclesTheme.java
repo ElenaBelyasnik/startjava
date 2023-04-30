@@ -38,21 +38,22 @@ public class CyclesTheme {
         }
 
         System.out.println("\n\n3. Вывод реверсивного числа и суммы его цифр");
-        int reverseNumber = 1234;
-        int digit;
+        int reverseNumber = 12; //1234;
         int sumDigits = 0;
         int i = 10;
-        System.out.print("Число 1234 в обратном порядке: ");
-        while (i <= 10000) {
-            digit = (reverseNumber % i) / (i / 10);
+        int j = 1;
+        System.out.print("Число " + reverseNumber + " в обратном порядке: ");
+        while (reverseNumber % i / j > 0) {
+            int digit = reverseNumber % i / j;
             System.out.print(digit);
             sumDigits += digit;
             i *= 10;
+            j *= 10;
         }
         System.out.println("\nСумма цифр числа " + reverseNumber + " : " + sumDigits);
 
         System.out.println("\n4. Вывод чисел на консоль в несколько строк");
-        int right = 24;
+        int right = 30;
         int delta = (5 - (right / 2) % 5) * 2;
         for (i = 1; i < right + delta; i += 2) {
             if (i > 1 & i % 5 == 1) {
@@ -60,7 +61,7 @@ public class CyclesTheme {
             }
             if (i < right) {
                 System.out.printf("%4d", i);
-            } else {
+            } else if (delta < 5) {
                 System.out.printf("%4d", 0);
             }
         }
@@ -68,13 +69,15 @@ public class CyclesTheme {
         System.out.println("\n\n5. Проверка количества двоек на четность/нечетность");
         int srcNumber = 3242592;
         i = 10;
+        j = 1;
         int countTwos = 0;
-        while (i <= 10000000) {
-            digit = (srcNumber % i) / (i / 10);
+        while (srcNumber % i / j > 0) {
+            int digit = srcNumber % i / j;
             if (digit == 2) {
                 countTwos += 1;
             }
             i *= 10;
+            j *= 10;
         }
         if (countTwos % 2 == 0) {
             System.out.println("число " + srcNumber + " содержит " + countTwos
@@ -85,53 +88,51 @@ public class CyclesTheme {
         }
 
         System.out.println("\n6. Отображение фигур в консоли");
-        for (int j = 0; j < 5; j++) {
+        for (i = 0; i < 5; i++) {
             System.out.println("***********");
         }
         System.out.println();
-        i = 5;
-        while (i > 0) {
-            int j = i;
-            while (j > 0) {
+        int strings = 5;
+        int sharpInString = 5;
+        while (strings > 0) {
+            int count = sharpInString;
+            while (count > 0) {
                 System.out.print("#");
-                j--;
+                count--;
             }
             System.out.println();
-            i--;
+            strings--;
+            sharpInString--;
         }
         System.out.println();
-        i = 5;
-        int k = 0;
+        strings = 1;
+        int totalDollarInString = 0;
         do {
-            int j;
-            if (i >= 3) {
-                k++;
-                j = k;
+            if (strings < 4) {
+                totalDollarInString++;
             } else {
 
-                k--;
-                j = k;
+                totalDollarInString--;
             }
+            int currentDollarInString = totalDollarInString;
             do {
                 System.out.print("$");
-                j--;
-            } while (j > 0);
+                currentDollarInString--;
+            } while (currentDollarInString > 0);
             System.out.println();
-            i--;
-        } while (i > 0);
+            strings++;
+        } while (strings <= 5);
 
         System.out.println("\n7. Отображение ASCII-символов");
-        char ch;
         System.out.println(" Dec Char");
         for (i = 0; i < 48; i++) {
             if (i % 2 != 0) {
-                System.out.printf("%4d%5s%n", i, (char) i);
+                System.out.printf("%4d%5c%n", i, i);
             }
         }
-        System.out.println(" Dec Char");
         for (i = 97; i < 122; i++) {
             if (i % 2 == 0) {
-                System.out.printf("%4d%5s%n", i, (char) i);
+                System.out.printf("%4d%5c%n", i, i);
             }
         }
 
@@ -178,7 +179,7 @@ public class CyclesTheme {
 
         for (i = 1; i < 10; i++) {
 
-            for (int j = 1; j < 10; j++) {
+            for (j = 1; j < 10; j++) {
                 if (j == 1) {
                     if (i == 1) {
                         System.out.printf("%2s", "|");
