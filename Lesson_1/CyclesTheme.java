@@ -1,17 +1,17 @@
 public class CyclesTheme {
     public static void main(String[] args) {
         System.out.println("1. Подсчет суммы четных и нечетных чисел");
-        int counter = -10;
+        int sourceNumber = -10;
         int sumEvenNumbers = 0;
         int sumOddNumbers = 0;
         do {
-            if (counter % 2 == 0) {
-                sumEvenNumbers += counter;
+            if (sourceNumber % 2 == 0) {
+                sumEvenNumbers += sourceNumber;
             } else {
-                sumOddNumbers += counter;
+                sumOddNumbers += sourceNumber;
             }
-            counter++;
-        } while (counter >= -10 & counter <= 21);
+            sourceNumber++;
+        } while (sourceNumber >= -10 & sourceNumber <= 21);
         System.out.println("в промежутке [-10, 21] сумма четных чисел = " + sumEvenNumbers
                 + ", а нечетных = " + sumOddNumbers);
 
@@ -73,7 +73,7 @@ public class CyclesTheme {
         }
 
         System.out.println("\n\n5. Проверка количества двоек на четность/нечетность");
-        int sourceNumber = 3242592;
+        sourceNumber = 3242592;
         int number = sourceNumber;
         int countTwos = 0;
         while (number > 0) {
@@ -142,48 +142,51 @@ public class CyclesTheme {
         }
 
         System.out.println("\n8. Проверка, является ли число палиндромом");
-        counter = 1234321;
-        int reverseNum = 0;
-        int currentNum = counter;
-        while (currentNum > 0) {
-            int firstNum = currentNum % 10;
-            reverseNum = reverseNum * 10 + firstNum;
-            currentNum = currentNum / 10;
+        sourceNumber = 1234321;
+        reverseNumber = 0;
+        int copySourceNumber = sourceNumber;
+        while (copySourceNumber > 0) {
+            int digit = copySourceNumber % 10;
+            reverseNumber = reverseNumber * 10 + digit;
+            copySourceNumber /= 10;
         }
-        if (counter == reverseNum) {
-            System.out.println("Число " + counter + " является палиндромом");
+        if (sourceNumber == reverseNumber) {
+            System.out.println("Число " + sourceNumber + " является палиндромом");
+        } else {
+            System.out.println("Число " + sourceNumber + " не является палиндромом");
         }
 
         System.out.println("\n9. Определение, является ли число счастливым");
-        counter = 123321;
+        sourceNumber = 123321;
         int sum1 = 0;
-        num1 = counter / 1000;
-        currentNum = num1;
-        while (currentNum > 0) {
-            int firstNum = currentNum % 10;
-            sum1 += firstNum;
-            currentNum = currentNum / 10;
-        }
+        int number1 = sourceNumber / 1000;
+        int copySourceNumber1 = sourceNumber / 1000;
         int sum2 = 0;
-        num2 = counter % 1000;
-        currentNum = num2;
-        while (currentNum > 0) {
-            int firstNum = currentNum % 10;
-            sum2 += firstNum;
-            currentNum = currentNum / 10;
+        int number2 = sourceNumber % 1000;
+        int copySourceNumber2 = sourceNumber % 1000;
+        while (copySourceNumber1 > 0 | copySourceNumber2 > 0) {
+            if (copySourceNumber1 > 0) {
+                int digit = copySourceNumber1 % 10;
+                sum1 += digit;
+                copySourceNumber1 /= 10;
+            }
+            if (copySourceNumber2 > 0) {
+                int digit = copySourceNumber2 % 10;
+                sum2 += digit;
+                copySourceNumber2 /= 10;
+            }
         }
-        System.out.println("Сумма цифр " + num1 + " = " + sum1);
-        System.out.println("Сумма цифр " + num2 + " = " + sum2);
+        System.out.println("Сумма цифр " + number1 + " = " + sum1);
+        System.out.println("Сумма цифр " + number2 + " = " + sum2);
         if (sum1 == sum2) {
-            System.out.println("Число " + counter + " является счастливым");
+            System.out.println("Число " + sourceNumber + " является счастливым");
         } else {
-            System.out.println("Число " + counter + "не является счастливым");
+            System.out.println("Число " + sourceNumber + "не является счастливым");
         }
 
         System.out.println("\n10. Вывод таблицы умножения Пифагора");
 
         for (int i = 1; i < 10; i++) {
-
             for (int j = 1; j < 10; j++) {
                 if (j == 1) {
                     if (i == 1) {
