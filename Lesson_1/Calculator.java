@@ -7,18 +7,18 @@ public class Calculator {
         double result = 0;
         if (sign == '+') {
             result = argument1 + argument2;
-        }else if (sign == '-') {
+        } else if (sign == '-') {
             result = argument1 - argument2;
-        }else if (sign == '*') {
+        } else if (sign == '*') {
             result = argument1 * argument2;
-        }else if (sign == '/') {
+        } else if (sign == '/') {
             result = argument1 / argument2;
-        }else if (sign == '^') {
+        } else if (sign == '^') {
             result = argument1;
             for (int i = 0; i < argument2; i++) {
                 result *= argument1;
             }
-        }else if (sign == '%') {
+        } else if (sign == '%') {
             result = argument1 % argument2;
         }
         System.out.println(argument1 + " " + sign + " " + argument2 + "=" + result);

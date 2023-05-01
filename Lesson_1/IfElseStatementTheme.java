@@ -87,7 +87,6 @@ public class IfElseStatementTheme {
             }
         }
 
-
         System.out.println("\n5. Определение символа по его коду");
         char code = '\u0057';
         System.out.println("Символ: " + code);
