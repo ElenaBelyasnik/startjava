@@ -7,12 +7,15 @@ public class MyFirstGame {
         do {
             randomNumber = (int) (Math.random() * 100 + 1);
             userNumber += 1;
+            if (userNumber > 100) {
+                userNumber = 1;
+            }
             if (userNumber > randomNumber) {
-                System.out.println("Число " + userNumber + " больше того, что загадал компьютер");
+                System.out.println("Р§РёСЃР»Рѕ " + userNumber + " Р±РѕР»СЊС€Рµ С‚РѕРіРѕ, С‡С‚Рѕ Р·Р°РіР°РґР°Р» РєРѕРјРїСЊСЋС‚РµСЂ");
             } else if (userNumber < randomNumber) {
-                System.out.println("Число " + userNumber + " меньше того, что загадал компьютер");
+                System.out.println("Р§РёСЃР»Рѕ " + userNumber + " РјРµРЅСЊС€Рµ С‚РѕРіРѕ, С‡С‚Рѕ Р·Р°РіР°РґР°Р» РєРѕРјРїСЊСЋС‚РµСЂ");
             } else {
-                System.out.println("Вы победили!");
+                System.out.println("Р’С‹ РїРѕР±РµРґРёР»Рё!");
             }
         } while (randomNumber != userNumber);
     }
