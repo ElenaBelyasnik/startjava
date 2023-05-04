@@ -69,7 +69,6 @@ public class CyclesTheme {
             }
         }
 
-
         System.out.println("\n\n5. Проверка количества двоек на четность/нечетность");
         sourceNumber = 3242592;
         int number = sourceNumber;
@@ -114,11 +113,11 @@ public class CyclesTheme {
             } else {
                 totalCharacterInString--;
             }
-            int currentCharacterInString = totalCharacterInString;
+            int currentCharacterInLine = totalCharacterInString;
             do {
                 System.out.print("$");
-                currentCharacterInString--;
-            } while (currentCharacterInString > 0);
+                currentCharacterInLine--;
+            } while (currentCharacterInLine > 0);
             System.out.println();
             lines++;
         } while (lines <= 5);
@@ -153,21 +152,21 @@ public class CyclesTheme {
 
         System.out.println("\n9. Определение, является ли число счастливым");
         sourceNumber = 123321;
-        int leftSum = 0;
+        int sumLeftHalf = 0;
         int leftNumber = sourceNumber / 1000;
         int copyLeftNumber = leftNumber;
-        int rightSum = 0;
+        int sumRightHalf = 0;
         int rightNumber = sourceNumber % 1000;
         int copyRightNumber = rightNumber;
         while (copyRightNumber > 0) {
-            leftSum += copyLeftNumber % 10;
+            sumLeftHalf += copyLeftNumber % 10;
             copyLeftNumber /= 10;
-            rightSum += copyRightNumber % 10;
+            sumRightHalf += copyRightNumber % 10;
             copyRightNumber /= 10;
         }
-        System.out.println("Сумма цифр " + leftNumber + " = " + leftSum);
-        System.out.println("Сумма цифр " + rightNumber + " = " + rightSum);
-        if (leftSum == rightSum) {
+        System.out.println("Сумма цифр " + leftNumber + " = " + sumLeftHalf);
+        System.out.println("Сумма цифр " + rightNumber + " = " + sumRightHalf);
+        if (sumLeftHalf == sumRightHalf) {
             System.out.println("Число " + sourceNumber + " является счастливым");
         } else {
             System.out.println("Число " + sourceNumber + "не является счастливым");
