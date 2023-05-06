@@ -6,22 +6,22 @@ public class Person {
     int age = 30;
 
     String walk() {
-        return "Идёт...";
+        return "РРґС‘С‚...";
     }
 
     String sit() {
-        return "Сидит...";
+        return "РЎРёРґРёС‚...";
     }
 
     String run() {
-        return "Бежит...";
+        return "Р‘РµР¶РёС‚...";
     }
 
     String talk() {
-        return "Говорит...";
+        return "Р“РѕРІРѕСЂРёС‚...";
     }
 
     String learnJava() {
-        return "Учит Java...";
+        return "РЈС‡РёС‚ Java...";
     }
 }
