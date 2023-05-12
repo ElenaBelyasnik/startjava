@@ -2,45 +2,11 @@ public class Calculator {
     private int argument1;
     private int argument2;
     private String sign;
-    private double result;
 
     public Calculator(int argument1, int argument2, String sign) {
         this.argument1 = argument1;
         this.argument2 = argument2;
         this.sign = sign;
-        this.result = analyzeAndCalculate();
-    }
-
-    public double analyzeAndCalculate() {
-        int res = 0;
-        int arg1 = this.getArgument1();
-        int arg2 = this.getArgument2();
-        switch (this.getSign()) {
-            case "+":
-                res = arg1 + arg2;
-                break;
-            case "-":
-                res = arg1 - arg2;
-                break;
-            case "*":
-                res = arg1 * arg2;
-                break;
-            case "/":
-                res = arg1 / arg2;
-                break;
-            case "%":
-                res = arg1 % arg2;
-                break;
-            case "^":
-                res = arg1;
-                for (int i = 0; i < arg2; i++) {
-                    res *= arg1;
-                }
-                break;
-            default:
-                System.out.println("Введенная математическая операция не поддерживается");
-        }
-        return res;
     }
 
     public int getArgument1() {
@@ -67,11 +33,27 @@ public class Calculator {
         this.sign = sign;
     }
 
-    public double getResult() {
-        return result;
-    }
-
-    public void setResult(double result) {
-        this.result = result;
+    public String calculate() {
+        int res = 0;
+        switch (sign) {
+            case "+":
+                return String.valueOf(argument1 + argument2);
+            case "-":
+                return String.valueOf(argument1 - argument2);
+            case "*":
+                return String.valueOf(argument1 * argument2);
+            case "/":
+                return String.valueOf((double) argument1 / argument2);
+            case "%":
+                return String.valueOf(argument1 % argument2);
+            case "^":
+                res = argument1;
+                for (int i = 0; i < argument2; i++) {
+                    res *= argument1;
+                }
+                return String.valueOf(res);
+            default:
+                return "Введенная математическая операция не поддерживается";
+        }
     }
 }

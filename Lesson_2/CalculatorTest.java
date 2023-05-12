@@ -5,13 +5,12 @@ public class CalculatorTest {
     public static void main(String[] args) {
         System.out.println("Калькулятор");
         do {
-            Calculator calculator = readArgs();
-            System.out.println(calculator.getArgument1() + " " + calculator.getSign() + " "
-                    + calculator.getArgument2() + " = " + calculator.getResult());
-        } while (!askForContinuation().equals("no"));
+            Calculator calculator = initiate();
+            System.out.println("Результат: " + calculator.calculate());
+        } while (isNext());
     }
 
-    private static Calculator readArgs() {
+    private static Calculator initiate() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Введите первое число: ");
         int argument1 = scanner.nextInt();
@@ -22,15 +21,15 @@ public class CalculatorTest {
         return new Calculator(argument1, argument2, sign);
     }
 
-    private static String askForContinuation() {
+    private static boolean isNext() {
         Scanner scanner = new Scanner(System.in);
-        boolean stopAsk;
-        String continuation;
+        String option;
+        boolean yes;
         do {
             System.out.println("Хотите продолжить вычисления? [yes/no]");
-            continuation = scanner.next();
-            stopAsk = continuation.equals("no") | continuation.equals("yes");
-        } while (!stopAsk);
-        return continuation;
+            option = scanner.next();
+            yes = option.equals("yes");
+        } while (!(yes || option.equals("no")));
+        return yes;
     }
 }
