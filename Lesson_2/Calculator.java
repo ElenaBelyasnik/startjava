@@ -1,11 +1,11 @@
 public class Calculator {
-    private int argument1;
-    private int argument2;
+    private int arg1;
+    private int arg2;
     private String sign;
 
-    public Calculator(int argument1, int argument2, String sign) {
-        this.argument1 = argument1;
-        this.argument2 = argument2;
+    public Calculator(int arg1, int arg2, String sign) {
+        this.arg1 = arg1;
+        this.arg2 = arg2;
         this.sign = sign;
     }
 
@@ -19,20 +19,20 @@ public class Calculator {
     public double calculate() {
         switch (sign) {
             case "+":
-                return argument1 + argument2;
+                return arg1 + arg2;
             case "-":
-                return argument1 - argument2;
+                return arg1 - arg2;
             case "*":
-                return argument1 * argument2;
+                return arg1 * arg2;
             case "/":
-                return (double) argument1 / argument2;
+                return (double) arg1 / arg2;
             case "%":
-                return argument1 % argument2;
+                return arg1 % arg2;
             case "^":
                 int result = 0;
-                result = argument1;
-                for (int i = 0; i < argument2; i++) {
-                    result *= argument1;
+                result = arg1;
+                for (int i = 0; i < arg2; i++) {
+                    result *= arg1;
                 }
                 return result;
         }
