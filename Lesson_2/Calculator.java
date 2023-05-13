@@ -9,51 +9,33 @@ public class Calculator {
         this.sign = sign;
     }
 
-    public int getArgument1() {
-        return argument1;
+    public boolean checkSign() {
+        return switch (sign) {
+            case "+", "-", "*", "/", "%", "^" -> true;
+            default -> false;
+        };
     }
 
-    public void setArgument1(int argument1) {
-        this.argument1 = argument1;
-    }
-
-    public int getArgument2() {
-        return argument2;
-    }
-
-    public void setArgument2(int argument2) {
-        this.argument2 = argument2;
-    }
-
-    public String getSign() {
-        return sign;
-    }
-
-    public void setSign(String sign) {
-        this.sign = sign;
-    }
-
-    public String calculate() {
-        int res = 0;
+    public double calculate() {
         switch (sign) {
             case "+":
-                return String.valueOf(argument1 + argument2);
+                return argument1 + argument2;
             case "-":
-                return String.valueOf(argument1 - argument2);
+                return argument1 - argument2;
             case "*":
-                return String.valueOf(argument1 * argument2);
+                return argument1 * argument2;
             case "/":
-                return String.valueOf((double) argument1 / argument2);
+                return (double) argument1 / argument2;
             case "%":
-                return String.valueOf(argument1 % argument2);
+                return argument1 % argument2;
             case "^":
-                res = argument1;
+                int result = 0;
+                result = argument1;
                 for (int i = 0; i < argument2; i++) {
-                    res *= argument1;
+                    result *= argument1;
                 }
-                return String.valueOf(res);
-            default:
-                return "Введенная математическая операция не поддерживается";
+                return result;
         }
+        return 0;
     }
 }

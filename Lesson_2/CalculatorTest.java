@@ -1,35 +1,38 @@
 import java.util.Scanner;
 
 public class CalculatorTest {
+    private static Scanner console = new Scanner(System.in);
 
     public static void main(String[] args) {
         System.out.println("Калькулятор");
         do {
             Calculator calculator = initiate();
-            System.out.println("Результат: " + calculator.calculate());
+            if (calculator.checkSign()) {
+                System.out.println("Результат: " + calculator.calculate());
+            } else {
+                System.out.println("Введённая математическая операция не поддерживается");
+            }
         } while (isNext());
     }
 
     private static Calculator initiate() {
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Введите первое число: ");
-        int argument1 = scanner.nextInt();
+        int argument1 = console.nextInt();
         System.out.println("Введите знак математической операции: ");
-        String sign = scanner.next();
+        String sign = console.next();
         System.out.println("Введите второе число: ");
-        int argument2 = scanner.nextInt();
+        int argument2 = console.nextInt();
         return new Calculator(argument1, argument2, sign);
     }
 
     private static boolean isNext() {
-        Scanner scanner = new Scanner(System.in);
         String option;
         boolean yes;
         do {
             System.out.println("Хотите продолжить вычисления? [yes/no]");
-            option = scanner.next();
+            option = console.next();
             yes = option.equals("yes");
-        } while (!(yes || option.equals("no")));
+        } while (!option.equals("yes") && !option.equals("no"));
         return yes;
     }
 }
