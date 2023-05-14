@@ -1,17 +1,13 @@
 import java.util.Scanner;
 
 public class CalculatorTest {
-    private static Scanner console = new Scanner(System.in);
+    private static final Scanner console = new Scanner(System.in);
 
     public static void main(String[] args) {
         System.out.println("Калькулятор");
         do {
             Calculator calculator = initiate();
-            if (calculator.checkSign()) {
-                System.out.println("Результат: " + calculator.calculate());
-            } else {
-                System.out.println("Введённая математическая операция не поддерживается");
-            }
+            System.out.println(calculator.calculate());
         } while (isNext());
     }
 
@@ -27,12 +23,10 @@ public class CalculatorTest {
 
     private static boolean isNext() {
         String option;
-        boolean yes;
         do {
             System.out.println("Хотите продолжить вычисления? [yes/no]");
             option = console.next();
-            yes = option.equals("yes");
         } while (!option.equals("yes") && !option.equals("no"));
-        return yes;
+        return option.equals("yes");
     }
 }

@@ -9,14 +9,22 @@ public class Calculator {
         this.sign = sign;
     }
 
-    public boolean checkSign() {
+    public String calculate() {
+        String resultText = "Введённая математическая операция не поддерживается";
+        if (isSignCorrect()) {
+            resultText = "Результат: " + calculateMathOperation();
+        }
+        return resultText;
+    }
+
+    private boolean isSignCorrect() {
         return switch (sign) {
             case "+", "-", "*", "/", "%", "^" -> true;
             default -> false;
         };
     }
 
-    public double calculate() {
+    private double calculateMathOperation() {
         switch (sign) {
             case "+":
                 return arg1 + arg2;
@@ -38,4 +46,6 @@ public class Calculator {
         }
         return 0;
     }
+
+
 }
