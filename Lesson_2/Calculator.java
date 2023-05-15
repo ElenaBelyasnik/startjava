@@ -10,18 +10,7 @@ public class Calculator {
     }
 
     public String calculate() {
-        String resultText = "Введённая математическая операция не поддерживается";
-        if (isSignCorrect()) {
-            resultText = "Результат: " + calculateMathOperation();
-        }
-        return resultText;
-    }
-
-    private boolean isSignCorrect() {
-        return switch (sign) {
-            case "+", "-", "*", "/", "%", "^" -> true;
-            default -> false;
-        };
+        return "Результат: " + calculateMathOperation();
     }
 
     private double calculateMathOperation() {
@@ -43,9 +32,9 @@ public class Calculator {
                     result *= arg1;
                 }
                 return result;
+            default:
+                System.out.println("Введённая математическая операция не поддерживается");
         }
         return 0;
     }
-
-
 }

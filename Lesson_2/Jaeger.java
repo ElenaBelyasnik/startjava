@@ -12,7 +12,8 @@ public class Jaeger {
     public Jaeger() {
     }
 
-    public Jaeger(String modelName, String mark, String origin, float height, float weight, int speed, int strength, int armor) {
+    public Jaeger(String modelName, String mark, String origin, float height, float weight,
+                  int speed, int strength, int armor) {
         this.modelName = modelName;
         this.mark = mark;
         this.origin = origin;
@@ -29,7 +30,7 @@ public class Jaeger {
 
     public void setModelName(String modelName) {
         if (modelName == "") {
-            System.out.println("Пустая строка");
+            System.out.println("РџСѓСЃС‚Р°СЏ СЃС‚СЂРѕРєР°");
         } else {
             this.modelName = modelName;
         }
@@ -92,12 +93,12 @@ public class Jaeger {
     }
 
     boolean drift() {
-        System.out.println("Вы вошли в дрифт");
+        System.out.println("Р’С‹ РІРѕС€Р»Рё РІ РґСЂРёС„С‚");
         return true;
     }
 
     public void move() {
-        System.out.println("Вы прошли 5 шагов");
+        System.out.println("Р’С‹ РїСЂРѕС€Р»Рё 5 С€Р°РіРѕРІ");
     }
 
     public String scanKaiju() {

@@ -10,15 +10,13 @@ public class JaegerTest {
         jaegerOne.setSpeed(9);
         jaegerOne.setStrength(8);
         jaegerOne.setArmor(6);
-
-        Jaeger jaegerTwo = new Jaeger("Gipsy Danger", "Mark-3", "USA",
-                79.25f, 1.98f, 7, 8, 6);
-
         jaegerOne.drift();
         jaegerOne.move();
         jaegerOne.scanKaiju();
         jaegerOne.useVortexCannon();
 
+        Jaeger jaegerTwo = new Jaeger("Gipsy Danger", "Mark-3", "USA",
+                79.25f, 1.98f, 7, 8, 6);
         jaegerTwo.drift();
         jaegerTwo.move();
         jaegerTwo.scanKaiju();
