@@ -9,8 +9,8 @@ public class Calculator {
         this.sign = sign;
     }
 
-    public String calculate() {
-        return "Результат: " + calculateMathOperation();
+    public void calculate() {
+        System.out.println("Результат: " + calculateMathOperation());
     }
 
     private double calculateMathOperation() {
@@ -26,8 +26,7 @@ public class Calculator {
             case "%":
                 return arg1 % arg2;
             case "^":
-                int result = 0;
-                result = arg1;
+                int result = arg1;
                 for (int i = 0; i < arg2; i++) {
                     result *= arg1;
                 }

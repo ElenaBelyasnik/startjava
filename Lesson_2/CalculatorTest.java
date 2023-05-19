@@ -7,7 +7,7 @@ public class CalculatorTest {
         System.out.println("Калькулятор");
         do {
             Calculator calculator = initiate();
-            System.out.println(calculator.calculate());
+            calculator.calculate();
         } while (isNext());
     }
 
