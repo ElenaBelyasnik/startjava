@@ -1,12 +1,12 @@
 import java.util.Scanner;
 
 public class Player {
+    private static final Scanner console = new Scanner(System.in);
     private final String name;
     private int number;
 
     public Player(String name) {
         this.name = name;
-        this.number = 0;
     }
 
     public String getName() {
@@ -21,7 +21,8 @@ public class Player {
         this.number = number;
     }
 
-    public void guessNumber() {
-        this.number++;
+    public void inputNumber() {
+        System.out.println("Игрок " + this.name + " вводит число: ");
+        this.number = console.nextInt();
     }
 }

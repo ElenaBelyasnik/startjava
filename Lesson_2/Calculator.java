@@ -1,7 +1,7 @@
 public class Calculator {
-    private int arg1;
-    private int arg2;
-    private String sign;
+    private final int arg1;
+    private final int arg2;
+    private final String sign;
 
     public Calculator(int arg1, int arg2, String sign) {
         this.arg1 = arg1;
@@ -9,11 +9,7 @@ public class Calculator {
         this.sign = sign;
     }
 
-    public void calculate() {
-        System.out.println("Результат: " + calculateMathOperation());
-    }
-
-    private double calculateMathOperation() {
+    public double calculate() {
         switch (sign) {
             case "+":
                 return arg1 + arg2;

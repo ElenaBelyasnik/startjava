@@ -7,18 +7,18 @@ public class CalculatorTest {
         System.out.println("Калькулятор");
         do {
             Calculator calculator = initiate();
-            calculator.calculate();
+            System.out.println("Результат: " + calculator.calculate());
         } while (isNext());
     }
 
     private static Calculator initiate() {
         System.out.println("Введите первое число: ");
-        int argument1 = console.nextInt();
+        int arg1 = console.nextInt();
         System.out.println("Введите знак математической операции: ");
         String sign = console.next();
         System.out.println("Введите второе число: ");
-        int argument2 = console.nextInt();
-        return new Calculator(argument1, argument2, sign);
+        int arg2 = console.nextInt();
+        return new Calculator(arg1, arg2, sign);
     }
 
     private static boolean isNext() {
