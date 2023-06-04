@@ -7,79 +7,70 @@ public class ArrayTheme {
     public static void main(String[] args) {
         reverse();
         printMultiplication();
-        removingArrayElements();
+        removeElements();
         displayArrayElementsLadder();
         generateUniqueNumbers();
         copyNonBlankLines();
     }
 
     public static void reverse() {
-        System.out.print("1. Реверс значений массива");
+        System.out.print("1. Р РµРІРµСЂСЃ Р·РЅР°С‡РµРЅРёР№ РјР°СЃСЃРёРІР°");
         int[] numbers = {1, 7, 5, 2, 6, 4, 3};
-
-        System.out.println();
-        for (int number : numbers) {
-            System.out.print(number + " ");
-        }
-
-        for (int i = 0; i < numbers.length / 2; i++) {
-            int index = (numbers.length - 1) - i;
+        int length = numbers.length;
+        printIntArray(numbers);
+        for (int i = 0; i < length / 2; i++) {
+            int index = (length - 1) - i;
             int transitNumber = numbers[i];
             numbers[i] = numbers[index];
             numbers[index] = transitNumber;
         }
-
-        System.out.println();
-        for (int number : numbers) {
-            System.out.print(number + " ");
-        }
+        printIntArray(numbers);
     }
 
     public static void printMultiplication() {
-        System.out.println("\n\n2. Вывод произведения элементов массива");
-        int[] numbers = new int[10];
+        System.out.println("\n\n2. Р’С‹РІРѕРґ РїСЂРѕРёР·РІРµРґРµРЅРёСЏ СЌР»РµРјРµРЅС‚РѕРІ РјР°СЃСЃРёРІР°");
+        int[] multipliers = new int[10];
+        int length = multipliers.length;
         int result = 1;
-        for (int i = 0; i < numbers.length; i++) {
-            numbers[i] = i;
+        for (int i = 0; i < length; i++) {
+            multipliers[i] = i;
             if (i > 0 && i < 9) {
                 result *= i;
             }
         }
-
         StringBuilder str = new StringBuilder();
-        for (int i = 0; i < numbers.length; i++) {
-            str.append((i == 0 || i == 9) ? numbers[i] + "[" + i + "]\n" :
-                    (i == 8) ? numbers[i] + " = " + result + "\n" : numbers[i] + " * ");
+        for (int i = 1; i <= 8; i++) {
+            str.append((i != 8) ? multipliers[i] + " * " : multipliers[i] + " = " + result + "\n");
         }
+        str.append(multipliers[0]).append("[").append(0).append("]\n");
+        str.append(multipliers[9]).append("[").append(9).append("]\n");
         System.out.println(str);
     }
 
-    public static void removingArrayElements() {
-        System.out.println("3. Удаление элементов массива");
-        double[] numbers = new double[15];
-        for (int i = 0; i < numbers.length; i++) {
-            numbers[i] = Math.random();
+    public static void removeElements() {
+        System.out.println("3. РЈРґР°Р»РµРЅРёРµ СЌР»РµРјРµРЅС‚РѕРІ РјР°СЃСЃРёРІР°");
+        double[] randomDoubles = new double[15];
+        for (int i = 0; i < randomDoubles.length; i++) {
+            randomDoubles[i] = Math.random();
         }
-        System.out.println("Исходный массив: ");
-        printArray(numbers, 0, 7);
-        printArray(numbers, 8, 14);
-        int index = numbers.length / 2;
-        double checkNumber = numbers[index];
+        System.out.println("РСЃС…РѕРґРЅС‹Р№ РјР°СЃСЃРёРІ: ");
+        printArray(randomDoubles);
+        int index = randomDoubles.length / 2;
+        double middleCellValue = randomDoubles[index];
         int zeroCells = 0;
-        for (int i = 0; i < numbers.length; i++) {
-            if (numbers[i] > checkNumber) {
-                numbers[i] = 0;
+        for (int i = 0; i < randomDoubles.length; i++) {
+            if (randomDoubles[i] > middleCellValue) {
+                randomDoubles[i] = 0;
                 zeroCells++;
             }
         }
-        System.out.println("Изменённый массив: ");
-        printArray(numbers, 0, 7);
-        printArray(numbers, 8, 14);
-        System.out.println("Количество обнулённых ячеек: " + zeroCells);
+        System.out.println("РР·РјРµРЅС‘РЅРЅС‹Р№ РјР°СЃСЃРёРІ: ");
+        printArray(randomDoubles);
+        System.out.println("РљРѕР»РёС‡РµСЃС‚РІРѕ РѕР±РЅСѓР»С‘РЅРЅС‹С… СЏС‡РµРµРє: " + zeroCells);
     }
 
     public static void displayArrayElementsLadder() {
-        System.out.println("\n4. Вывод элементов массива лесенкой в обратном порядке");
+        System.out.println("\n4. Р’С‹РІРѕРґ СЌР»РµРјРµРЅС‚РѕРІ РјР°СЃСЃРёРІР° Р»РµСЃРµРЅРєРѕР№ РІ РѕР±СЂР°С‚РЅРѕРј РїРѕСЂСЏРґРєРµ");
         char[] chars = new char[26];
         int i = 0;
         for (char ch = 'A'; ch <= 'Z'; ch++) {
@@ -94,7 +85,7 @@ public class ArrayTheme {
     }
 
     public static void generateUniqueNumbers() {
-        System.out.print("\n5. Генерация уникальных чисел\n");
+        System.out.print("\n5. Р“РµРЅРµСЂР°С†РёСЏ СѓРЅРёРєР°Р»СЊРЅС‹С… С‡РёСЃРµР»\n");
         int[] ints = new int[30];
         int min = 60;
         int max = 100;
@@ -123,7 +114,7 @@ public class ArrayTheme {
     }
 
     public static void copyNonBlankLines() {
-        System.out.print("\n\n6. Копирование не пустых строк\n");
+        System.out.print("\n\n6. РљРѕРїРёСЂРѕРІР°РЅРёРµ РЅРµ РїСѓСЃС‚С‹С… СЃС‚СЂРѕРє\n");
         String[] strings1 = {"    ", "AA", "", "BBB", "CC", "D", "    ", "E", "FF", "G", ""};
 //        String[] strings1 = {"    ", ""};
 //        String[] strings1 = {"    ", "AA", "", "E", "FF", "G", ""};
@@ -142,8 +133,19 @@ public class ArrayTheme {
         System.out.println(Arrays.deepToString(strings2));
     }
 
-    private static void printArray(double[] numbers, int firstIndex, int lastIndex) {
-        for (int i = firstIndex; i <= lastIndex; i++) {
+    private static void printIntArray(int[] numbers) {
+        System.out.println();
+        for (int number : numbers) {
+            System.out.print(number + " ");
+        }
+    }
+
+    private static void printArray(double[] numbers) {
+        for (int i = 0; i <= 7; i++) {
+            System.out.printf("%.3f  ", numbers[i]);
+        }
+        System.out.println();
+        for (int i = 8; i <= 14; i++) {
             System.out.printf("%.3f  ", numbers[i]);
         }
         System.out.println();
