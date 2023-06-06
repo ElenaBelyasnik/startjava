@@ -19,7 +19,7 @@ public class ArrayTheme {
         int length = numbers.length;
         printIntArray(numbers);
         for (int i = 0; i < length / 2; i++) {
-            int index = (length - 1) - i;
+            int index = --length;
             int transitNumber = numbers[i];
             numbers[i] = numbers[index];
             numbers[index] = transitNumber;
@@ -39,8 +39,10 @@ public class ArrayTheme {
             }
         }
         StringBuilder str = new StringBuilder();
-        for (int i = 1; i <= 8; i++) {
-            str.append((i != 8) ? multipliers[i] + " * " : multipliers[i] + " = " + result + "\n");
+        int indexBeforeLast = length - 2;
+        for (int i = 1; i <= indexBeforeLast; i++) {
+            str.append(multipliers[i])
+                    .append((i != indexBeforeLast) ? " * " : " = " + result + "\n");
         }
         str.append(multipliers[0]).append("[").append(0).append("]\n");
         str.append(multipliers[9]).append("[").append(9).append("]\n");
@@ -50,15 +52,15 @@ public class ArrayTheme {
     public static void removeElements() {
         System.out.println("3. Удаление элементов массива");
         double[] randomDoubles = new double[15];
-        for (int i = 0; i < randomDoubles.length; i++) {
+        int length = randomDoubles.length;
+        for (int i = 0; i < length; i++) {
             randomDoubles[i] = Math.random();
         }
         System.out.println("Исходный массив: ");
         printArray(randomDoubles);
-        int index = randomDoubles.length / 2;
-        double middleCellValue = randomDoubles[index];
+        double middleCellValue = randomDoubles[length / 2];
         int zeroCells = 0;
-        for (int i = 0; i < randomDoubles.length; i++) {
+        for (int i = 0; i < length; i++) {
             if (randomDoubles[i] > middleCellValue) {
                 randomDoubles[i] = 0;
                 zeroCells++;
@@ -71,14 +73,15 @@ public class ArrayTheme {
 
     public static void displayArrayElementsLadder() {
         System.out.println("\n4. Вывод элементов массива лесенкой в обратном порядке");
-        char[] chars = new char[26];
+        char[] letters = new char[26];
         int i = 0;
         for (char ch = 'A'; ch <= 'Z'; ch++) {
-            chars[i++] = ch;
+            letters[i] = (char) ('A' + i);
+            i++;
         }
-        for (i = chars.length - 1; i >= 0; i--) {
-            for (int j = chars.length - 1; j > i - 1; j--) {
-                System.out.print(chars[j]);
+        for (i = letters.length - 1; i >= 0; i--) {
+            for (int j = letters.length - 1; j > i - 1; j--) {
+                System.out.print(letters[j]);
             }
             System.out.println();
         }
@@ -86,24 +89,24 @@ public class ArrayTheme {
 
     public static void generateUniqueNumbers() {
         System.out.print("\n5. Генерация уникальных чисел\n");
-        int[] ints = new int[30];
+        int[] uniqueNumbers = new int[30];
         int min = 60;
         int max = 100;
-        for (int i = 0; i < ints.length; i++) {
-            int[] ints1 = new int[i];
+
+        for (int i = 0; i < uniqueNumbers.length; i++) {
             if (i == 0) {
-                ints[i] = rnd(min, max);
+                uniqueNumbers[i] = rnd(min, max);
             } else {
+                int number;
                 do {
-                    ints[i] = rnd(min, max);
-                    System.arraycopy(ints, 0, ints1, 0, i);
-                } while (isRepeat(ints1, ints[i]));
+                    number = rnd(min, max);
+                } while (!isUnique(uniqueNumbers, number));
+                uniqueNumbers[i] = number;
             }
         }
-        int[] sortInts = new int[30];
-        sortInts = sort(ints);
+        sort(uniqueNumbers);
         int count = 0;
-        for (int anInt : sortInts) {
+        for (int anInt : uniqueNumbers) {
             if (count == 10) {
                 System.out.println();
                 count = 0;
@@ -115,22 +118,32 @@ public class ArrayTheme {
 
     public static void copyNonBlankLines() {
         System.out.print("\n\n6. Копирование не пустых строк\n");
-        String[] strings1 = {"    ", "AA", "", "BBB", "CC", "D", "    ", "E", "FF", "G", ""};
-//        String[] strings1 = {"    ", ""};
-//        String[] strings1 = {"    ", "AA", "", "E", "FF", "G", ""};
-//        String[] strings1 = {"FF", "G", ""};
-        int notEmptySegments = countNotEmptySegments(strings1);
-        int[][] params = getParams(strings1, notEmptySegments);
-        int strings2Length = 0;
-        for (int[] ints : params) {
-            strings2Length += ints[2];
+        String[] srcStrings = {"    ", "AA", "", "BBB", "CC", "D", "    ", "E", "FF", "G", ""};
+//        String[] srcStrings = {"    ", ""};
+//        String[] srcStrings = {"    ", "AA", "", "E", "FF", "G", ""};
+//        String[] srcStrings = {"FF", "G", ""};
+        String[] nonEmptyStrings = new String[calculateNonEmptyLength(srcStrings)];
+        int srcPos;
+        int length = 1;
+        int destPos = 0;
+        int prevLength = 0;
+        int prevDestPos = 0;
+        for (int i = 0; i < srcStrings.length; i++) {
+            if ((i == 0 && !isEmptyString(srcStrings[i])) ||
+                    (i > 0 && !isEmptyString(srcStrings[i]) && isEmptyString(srcStrings[i - 1]))) {
+                srcPos = i;
+                length = 1;
+                while (!isEmptyString(srcStrings[i + length])) {
+                    length++;
+                }
+                destPos = prevDestPos + prevLength;
+                prevDestPos = destPos;
+                prevLength = length;
+                System.arraycopy(srcStrings, srcPos, nonEmptyStrings, destPos, length);
+            }
         }
-        String[] strings2 = new String[strings2Length];
-        for (int[] param : params) {
-            System.arraycopy(strings1, param[0], strings2, param[1], param[2]);
-        }
-        System.out.println(Arrays.deepToString(strings1));
-        System.out.println(Arrays.deepToString(strings2));
+        System.out.println(Arrays.deepToString(srcStrings));
+        System.out.println(Arrays.deepToString(nonEmptyStrings));
     }
 
     private static void printIntArray(int[] numbers) {
@@ -141,27 +154,25 @@ public class ArrayTheme {
     }
 
     private static void printArray(double[] numbers) {
-        for (int i = 0; i <= 7; i++) {
+        for (int i = 0; i <= 14; i++) {
             System.out.printf("%.3f  ", numbers[i]);
+            if (i == 8 || i == 14) {
+                System.out.println();
+            }
         }
-        System.out.println();
-        for (int i = 8; i <= 14; i++) {
-            System.out.printf("%.3f  ", numbers[i]);
-        }
-        System.out.println();
     }
 
     private static int rnd(int min, int max) {
         return (int) (Math.random() * (max - min)) + min;
     }
 
-    private static boolean isRepeat(int[] ints, int number) {
+    private static boolean isUnique(int[] ints, int number) {
         for (int anInt : ints) {
             if (anInt == number) {
-                return true;
+                return false;
             }
         }
-        return false;
+        return true;
     }
 
     private static int[] sort(int[] array) {
@@ -178,50 +189,17 @@ public class ArrayTheme {
         return array;
     }
 
+    private static int calculateNonEmptyLength(String[] strings) {
+        int nonEmptyLength = 0;
+        for (String string : strings) {
+            if (!isEmptyString(string)) {
+                nonEmptyLength++;
+            }
+        }
+        return nonEmptyLength;
+    }
+
     private static boolean isEmptyString(String string) {
         return string.trim().isEmpty();
-    }
-
-    private static boolean isNotEmptyString(String string) {
-        return !string.trim().isEmpty();
-    }
-
-    private static int countNotEmptySegments(String[] strings) {
-        int count = 0;
-        for (int i = 0; i < strings.length; i++) {
-            if (i == 0 && isNotEmptyString(strings[i])) {
-                count++;
-            }
-            if (i > 0 && isNotEmptyString(strings[i]) && isEmptyString(strings[i - 1])) {
-                count++;
-            }
-        }
-        return count;
-    }
-
-    private static int[][] getParams(String[] strings, int countSegments) {
-        int[][] params = new int[countSegments][3];
-        int segment = 0;
-        for (int i = 0; i < strings.length; i++) {
-            if ((i == 0 && isNotEmptyString(strings[i])) ||
-                    (i > 0 && isNotEmptyString(strings[i]) && isEmptyString(strings[i - 1]))) {
-                // srcPos
-                params[segment][0] = i;
-                // length
-                int length = 1;
-                while (isNotEmptyString(strings[i + length])) {
-                    length++;
-                }
-                params[segment][2] = length;
-                //destPos
-                if (segment == 0) {
-                    params[segment][1] = 0;
-                } else {
-                    params[segment][1] = params[segment - 1][1] + params[segment - 1][2];
-                }
-                segment++;
-            }
-        }
-        return params;
     }
 }
