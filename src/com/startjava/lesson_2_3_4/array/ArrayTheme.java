@@ -75,7 +75,7 @@ public class ArrayTheme {
         System.out.println("\n4. Вывод элементов массива лесенкой в обратном порядке");
         char[] letters = new char[26];
         int i = 0;
-        for (char ch = 'A'; ch <= 'Z'; ch++) {
+        for (char j = 'A'; j <= 'Z'; j++) {
             letters[i] = (char) ('A' + i);
             i++;
         }
@@ -94,15 +94,11 @@ public class ArrayTheme {
         int max = 100;
 
         for (int i = 0; i < uniqueNumbers.length; i++) {
-            if (i == 0) {
-                uniqueNumbers[i] = rnd(min, max);
-            } else {
-                int number;
-                do {
-                    number = rnd(min, max);
-                } while (!isUnique(uniqueNumbers, number));
-                uniqueNumbers[i] = number;
-            }
+            int number;
+            do {
+                number = rnd(min, max);
+            } while (!isUnique(uniqueNumbers, i, number));
+            uniqueNumbers[i] = number;
         }
         sort(uniqueNumbers);
         int count = 0;
@@ -166,9 +162,9 @@ public class ArrayTheme {
         return (int) (Math.random() * (max - min)) + min;
     }
 
-    private static boolean isUnique(int[] ints, int number) {
-        for (int anInt : ints) {
-            if (anInt == number) {
+    private static boolean isUnique(int[] ints, int maxIndex, int number) {
+        for (int i = 0; i <= maxIndex; i++) {
+            if (ints[i] == number) {
                 return false;
             }
         }
@@ -200,6 +196,6 @@ public class ArrayTheme {
     }
 
     private static boolean isEmptyString(String string) {
-        return string.trim().isEmpty();
+        return string.trim().isBlank();
     }
 }
