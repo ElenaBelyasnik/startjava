@@ -19,10 +19,9 @@ public class ArrayTheme {
         int length = numbers.length;
         printIntArray(numbers);
         for (int i = 0; i < length / 2; i++) {
-            int index = --length;
             int transitNumber = numbers[i];
-            numbers[i] = numbers[index];
-            numbers[index] = transitNumber;
+            numbers[i] = numbers[--length];
+            numbers[length] = transitNumber;
         }
         printIntArray(numbers);
     }
@@ -73,15 +72,14 @@ public class ArrayTheme {
 
     public static void displayArrayElementsLadder() {
         System.out.println("\n4. Вывод элементов массива лесенкой в обратном порядке");
-        char[] letters = new char[26];
-        int i = 0;
-        for (char j = 'A'; j <= 'Z'; j++) {
-            letters[i] = (char) ('A' + i);
-            i++;
+        char[] alphabet = new char[26];
+        int length = alphabet.length;
+        for (char i = 0; i < length; i++) {
+            alphabet[i] = (char) ('A' + i);
         }
-        for (i = letters.length - 1; i >= 0; i--) {
-            for (int j = letters.length - 1; j > i - 1; j--) {
-                System.out.print(letters[j]);
+        for (int i = length - 1; i >= 0; i--) {
+            for (int j = alphabet.length - 1; j > i - 1; j--) {
+                System.out.print(alphabet[j]);
             }
             System.out.println();
         }
@@ -120,22 +118,25 @@ public class ArrayTheme {
 //        String[] srcStrings = {"FF", "G", ""};
         String[] nonEmptyStrings = new String[calculateNonEmptyLength(srcStrings)];
         int srcPos;
-        int length = 1;
+        int length = 0;
         int destPos = 0;
         int prevLength = 0;
         int prevDestPos = 0;
-        for (int i = 0; i < srcStrings.length; i++) {
-            if ((i == 0 && !isEmptyString(srcStrings[i])) ||
-                    (i > 0 && !isEmptyString(srcStrings[i]) && isEmptyString(srcStrings[i - 1]))) {
+        int j = 0;
+        for (int i = 0; i < srcStrings.length; ) {
+            length = 0;
+            while (isNotEmptyString(srcStrings[i + length])) {
+                length++;
+            }
+            if (length > 0) {
                 srcPos = i;
-                length = 1;
-                while (!isEmptyString(srcStrings[i + length])) {
-                    length++;
-                }
                 destPos = prevDestPos + prevLength;
                 prevDestPos = destPos;
                 prevLength = length;
                 System.arraycopy(srcStrings, srcPos, nonEmptyStrings, destPos, length);
+                i += length;
+            } else {
+                i++;
             }
         }
         System.out.println(Arrays.deepToString(srcStrings));
@@ -171,7 +172,7 @@ public class ArrayTheme {
         return true;
     }
 
-    private static int[] sort(int[] array) {
+    private static void sort(int[] array) {
         int temp;
         for (int i = array.length - 1; i > 0; i--) {
             for (int j = 0; j < i; j++) {
@@ -182,20 +183,19 @@ public class ArrayTheme {
                 }
             }
         }
-        return array;
     }
 
     private static int calculateNonEmptyLength(String[] strings) {
         int nonEmptyLength = 0;
         for (String string : strings) {
-            if (!isEmptyString(string)) {
+            if (isNotEmptyString(string)) {
                 nonEmptyLength++;
             }
         }
         return nonEmptyLength;
     }
 
-    private static boolean isEmptyString(String string) {
-        return string.trim().isBlank();
+    private static boolean isNotEmptyString(String string) {
+        return !string.trim().isBlank();
     }
 }

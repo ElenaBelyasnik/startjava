@@ -7,6 +7,7 @@ public class CalculatorTest {
 
     public static void main(String[] args) {
         System.out.println("Калькулятор");
+        System.out.println("У каждого игрока по 10 попыток");
         do {
             Calculator calculator = initiate();
             System.out.println("Результат: " + calculator.calculate());
@@ -14,13 +15,10 @@ public class CalculatorTest {
     }
 
     private static Calculator initiate() {
-        System.out.println("Введите первое число: ");
-        int arg1 = console.nextInt();
-        System.out.println("Введите знак математической операции: ");
-        String sign = console.next();
-        System.out.println("Введите второе число: ");
-        int arg2 = console.nextInt();
-        return new Calculator(arg1, arg2, sign);
+        System.out.println("Введите математическое выражение: ");
+        String expressionString = console.nextLine();
+        String[] expressionParts = expressionString.split(" ");
+        return new Calculator(expressionParts);
     }
 
     private static boolean isNext() {

@@ -1,5 +1,7 @@
 package com.startjava.lesson_2_3_4.calculator;
 
+import java.util.Objects;
+
 public class Calculator {
     private final int arg1;
     private final int arg2;
@@ -11,6 +13,12 @@ public class Calculator {
         this.sign = sign;
     }
 
+    public Calculator(String[] expressionParts) {
+        this.arg1 = Integer.parseInt(expressionParts[0]);
+        this.sign = expressionParts[1];
+        this.arg2 = Integer.parseInt(expressionParts[2]);
+    }
+
     public double calculate() {
         switch (sign) {
             case "+":
@@ -18,17 +26,13 @@ public class Calculator {
             case "-":
                 return arg1 - arg2;
             case "*":
-                return arg1 * arg2;
+                return Math.multiplyExact(arg1, arg2);
             case "/":
-                return (double) arg1 / arg2;
+                return Math.floorDiv(arg1, arg2);
             case "%":
                 return arg1 % arg2;
             case "^":
-                int result = arg1;
-                for (int i = 0; i < arg2; i++) {
-                    result *= arg1;
-                }
-                return result;
+                return Math.pow(arg1, arg2);
             default:
                 System.out.println("Введённая математическая операция не поддерживается");
         }
