@@ -6,27 +6,18 @@ public class CalculatorTest {
     private static final Scanner console = new Scanner(System.in);
 
     public static void main(String[] args) {
-        System.out.println("Калькулятор");
-        System.out.println("У каждого игрока по 10 попыток");
+        System.out.println("Калькулятор запущен!");
+        String answer = "yes";
         do {
-            Calculator calculator = initiate();
-            System.out.println("Результат: " + calculator.calculate());
-        } while (isNext());
-    }
-
-    private static Calculator initiate() {
-        System.out.println("Введите математическое выражение: ");
-        String expressionString = console.nextLine();
-        String[] expressionParts = expressionString.split(" ");
-        return new Calculator(expressionParts);
-    }
-
-    private static boolean isNext() {
-        String option;
-        do {
+            if ("yes".equals(answer)) {
+                System.out.println("Введите математическое выражение: ");
+                String expression = console.nextLine();
+                Calculator calculator = new Calculator(expression);
+                System.out.println("Результат: " + calculator.calculate());
+            }
             System.out.println("Хотите продолжить вычисления? [yes/no]");
-            option = console.next();
-        } while (!option.equals("yes") && !option.equals("no"));
-        return option.equals("yes");
+            answer = console.nextLine();
+        } while (!"no".equals(answer));
+        System.out.println("Калькулятор закрылся.");
     }
 }

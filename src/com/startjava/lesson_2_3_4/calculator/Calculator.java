@@ -7,16 +7,11 @@ public class Calculator {
     private final int arg2;
     private final String sign;
 
-    public Calculator(int arg1, int arg2, String sign) {
-        this.arg1 = arg1;
-        this.arg2 = arg2;
-        this.sign = sign;
-    }
-
-    public Calculator(String[] expressionParts) {
-        this.arg1 = Integer.parseInt(expressionParts[0]);
-        this.sign = expressionParts[1];
-        this.arg2 = Integer.parseInt(expressionParts[2]);
+    public Calculator(String expression) {
+        String[] args = expression.split(" ");
+        this.arg1 = Integer.parseInt(args[0]);
+        this.arg2 = Integer.parseInt(args[2]);
+        this.sign = args[1];
     }
 
     public double calculate() {
