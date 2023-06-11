@@ -6,26 +6,27 @@ public class GuessNumberTest {
     private static final Scanner console = new Scanner(System.in);
 
     public static void main(String[] args) {
+        System.out.println("У каждого игрока по 10 попыток");
         Player player1 = initPlayer();
         Player player2 = initPlayer();
+        String answer = "yes";
         do {
-            GuessNumber guessNumber = new GuessNumber(player1, player2);
-            guessNumber.play();
-        } while (isNext());
+            if ("yes".equals(answer)) {
+                player1.restart();
+                player2.restart();
+                GuessNumber guessNumber = new GuessNumber(player1, player2);
+                guessNumber.play();
+                player1.printResults();
+                player2.printResults();
+            }
+            System.out.println("Хотите продолжить вычисления? [yes/no]");
+            answer = console.nextLine();
+        } while (!"no".equals(answer));
     }
 
     private static Player initPlayer() {
         System.out.println("Введите имя игрока: ");
-        String name = console.next();
+        String name = console.nextLine();
         return new Player(name);
-    }
-
-    private static boolean isNext() {
-        String option;
-        do {
-            System.out.println("Хотите продолжить игру? [yes/no]");
-            option = console.next();
-        } while (!option.equals("yes") && !option.equals("no"));
-        return option.equals("yes");
     }
 }

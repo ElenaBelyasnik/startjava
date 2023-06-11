@@ -1,17 +1,15 @@
 package com.startjava.lesson_2_3_4.calculator;
 
-import java.util.Objects;
-
 public class Calculator {
     private final int arg1;
     private final int arg2;
     private final String sign;
 
     public Calculator(String expression) {
-        String[] args = expression.split(" ");
-        this.arg1 = Integer.parseInt(args[0]);
-        this.arg2 = Integer.parseInt(args[2]);
-        this.sign = args[1];
+        String[] partsExpression = expression.split(" ");
+        this.arg1 = Integer.parseInt(partsExpression[0]);
+        this.arg2 = Integer.parseInt(partsExpression[2]);
+        this.sign = partsExpression[1];
     }
 
     public double calculate() {
