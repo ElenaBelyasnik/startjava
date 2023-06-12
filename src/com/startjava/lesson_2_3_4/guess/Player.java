@@ -1,24 +1,20 @@
 package com.startjava.lesson_2_3_4.guess;
 
 import java.util.Arrays;
-import java.util.Scanner;
 
 public class Player {
-    private static final Scanner console = new Scanner(System.in);
-    private static final int TOTAL_TRY_NUMBER = 10;
+    private static final int CAPACITY = 10;
     private final String name;
-    private int[] numbers = new int[TOTAL_TRY_NUMBER];
-    private int[] results;
-    private int number;
-    private int playerTryNumber;
+    private int[] numbers = new int[CAPACITY];
+    private int attempt = 0;
 
     public Player(String name) {
         this.name = name;
     }
 
-    public void restart() {
-        Arrays.fill(this.numbers, 0);
-        this.playerTryNumber = 0;
+    public void clear() {
+        Arrays.fill(numbers, 0, attempt, 0);
+        this.attempt = 0;
     }
 
     public String getName() {
@@ -29,35 +25,30 @@ public class Player {
         return numbers;
     }
 
-    public int getNumber() {
-        return number;
+    public void setNumbers(int[] numbers) {
+        this.numbers = numbers;
     }
 
-    public int getPlayerTryNumber() {
-        return playerTryNumber;
+    public int getAttempt() {
+        return attempt;
     }
 
-    public int[] getResults() {
-        return results;
+    public void setAttempt(int attempt) {
+        this.attempt = attempt;
     }
 
-    public void inputNumber() {
-            System.out.println("Игрок " + this.name + " вводит число: ");
-            this.number = console.nextInt();
-            this.numbers[this.playerTryNumber] = this.number;
-            this.playerTryNumber++;
+
+    public boolean isPlayerAttemptNotOver() {
+        boolean isNotOver = attempt < numbers.length;
+        if (!isNotOver) {
+            System.out.println("У " + name + " закончились попытки");
+        }
+        return isNotOver;
     }
 
-    public boolean isPlayerValid() {
-        return playerTryNumber < numbers.length;
-    }
-
-    public void saveResults() {
-        results = Arrays.copyOf(numbers, playerTryNumber);
-    }
-
-    public void printResults(){
+    public void printResults() {
         System.out.print("Числа, названные игроком " + name + ": ");
+        int[] results = Arrays.copyOf(numbers, attempt);
         for (int result : results) {
             System.out.print(result + " ");
         }

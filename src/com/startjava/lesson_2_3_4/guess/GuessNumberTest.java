@@ -10,14 +10,10 @@ public class GuessNumberTest {
         Player player1 = initPlayer();
         Player player2 = initPlayer();
         String answer = "yes";
+        GuessNumber guessNumber = new GuessNumber(player1, player2);
         do {
             if ("yes".equals(answer)) {
-                player1.restart();
-                player2.restart();
-                GuessNumber guessNumber = new GuessNumber(player1, player2);
                 guessNumber.play();
-                player1.printResults();
-                player2.printResults();
             }
             System.out.println("Хотите продолжить вычисления? [yes/no]");
             answer = console.nextLine();
