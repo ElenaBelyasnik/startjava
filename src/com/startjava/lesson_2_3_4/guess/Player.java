@@ -6,27 +6,24 @@ public class Player {
     private static final int CAPACITY = 10;
     private final String name;
     private int[] numbers = new int[CAPACITY];
-    private int attempt = 0;
+    private int attempt;
 
     public Player(String name) {
         this.name = name;
     }
 
-    public void clear() {
-        Arrays.fill(numbers, 0, attempt, 0);
-        this.attempt = 0;
-    }
+
 
     public String getName() {
         return name;
     }
 
     public int[] getNumbers() {
-        return numbers;
+        return Arrays.copyOf(numbers, getResultsLength());
     }
 
-    public void setNumbers(int[] numbers) {
-        this.numbers = numbers;
+    public void addNumbers(int number, int index) {
+        numbers[index] = number;
     }
 
     public int getAttempt() {
@@ -37,21 +34,21 @@ public class Player {
         this.attempt = attempt;
     }
 
-
-    public boolean isPlayerAttemptNotOver() {
-        boolean isNotOver = attempt < numbers.length;
-        if (!isNotOver) {
-            System.out.println("У " + name + " закончились попытки");
+    public int getResultsLength() {
+        for (int i = 0; i < numbers.length; i++) {
+            if (numbers[i] == 0) {
+                return i;
+            }
         }
-        return isNotOver;
+        return 0;
     }
 
-    public void printResults() {
-        System.out.print("Числа, названные игроком " + name + ": ");
-        int[] results = Arrays.copyOf(numbers, attempt);
-        for (int result : results) {
-            System.out.print(result + " ");
-        }
-        System.out.println();
+    public int[] getFullNumbers(){
+        return Arrays.copyOf(numbers, numbers.length);
+    }
+
+    public void clear() {
+        Arrays.fill(numbers, 0, attempt, 0);
+        attempt = 0;
     }
 }
