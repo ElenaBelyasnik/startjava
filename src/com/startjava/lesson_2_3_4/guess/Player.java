@@ -21,7 +21,7 @@ public class Player {
     }
 
     public void addNumber(int number) {
-        if (attempt < numbers.length) {
+        if (attempt < CAPACITY) {
             numbers[attempt] = number;
         }
         attempt++;

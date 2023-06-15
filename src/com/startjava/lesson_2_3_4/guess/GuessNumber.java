@@ -28,24 +28,28 @@ public class GuessNumber {
         Player currentPlayer = player1;
         while (isGameNotOver()) {
             int currentNumber = inputNumber(currentPlayer);
-            if (currentNumber > secretNumber) {
-                System.out.println("Число " + currentNumber
-                        + " больше того, что загадал компьютер (" + secretNumber + ")");
-            } else if (currentNumber < secretNumber) {
-                System.out.println("Число " + currentNumber
-                        + " меньше того, что загадал компьютер (" + secretNumber + ")");
-            } else {
-                isWin = true;
-                System.out.println("Игрок " + currentPlayer.getName() + " угадал число "
-                        + currentNumber + " c "
-                        + currentPlayer.getAttempt() + " попытки");
-                printResults(player1);
-                printResults(player2);
-            }
+            checkNumber(currentPlayer, secretNumber, currentNumber);
             currentPlayer = changePlayer(currentPlayer);
         }
+        printAttempts(player1);
+        printAttempts(player2);
         if (!isWin) {
             System.out.println("Никто из игроков не угадал число.");
+        }
+    }
+
+    private void checkNumber(Player currentPlayer, int secretNumber, int currentNumber) {
+        if (currentNumber > secretNumber) {
+            System.out.println("Число " + currentNumber
+                    + " больше того, что загадал компьютер (" + secretNumber + ")");
+        } else if (currentNumber < secretNumber) {
+            System.out.println("Число " + currentNumber
+                    + " меньше того, что загадал компьютер (" + secretNumber + ")");
+        } else {
+            isWin = true;
+            System.out.println("Игрок " + currentPlayer.getName() + " угадал число "
+                    + currentNumber + " c "
+                    + currentPlayer.getAttempt() + " попытки");
         }
     }
 
@@ -75,7 +79,7 @@ public class GuessNumber {
         return player1;
     }
 
-    public void printResults(Player player) {
+    public void printAttempts(Player player) {
         System.out.print("Числа, названные игроком " + player.getName() + ": ");
         int[] numbers = player.getNumbers();
         for (int number : numbers) {
