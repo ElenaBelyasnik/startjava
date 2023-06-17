@@ -12,12 +12,17 @@ public class CalculatorTest {
             if ("yes".equals(answer)) {
                 System.out.println("Введите математическое выражение: ");
                 String expression = console.nextLine();
-                Calculator calculator = new Calculator(expression);
-                System.out.println("Результат: " + calculator.calculate());
+                Calculator.initCalculator(expression);
+                showResult(Calculator.calculate());
             }
             System.out.println("Хотите продолжить вычисления? [yes/no]");
             answer = console.nextLine();
         } while (!"no".equals(answer));
         System.out.println("Калькулятор закрылся.");
+    }
+
+    private static void showResult(Double result) {
+        String stringFormat = (result % 1 == 0) ? "%.0f\n" : "%.3f\n";
+        System.out.printf("Результат: " + stringFormat, result);
     }
 }
