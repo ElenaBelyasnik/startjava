@@ -21,7 +21,7 @@ public class CalculatorTest {
         System.out.println("Калькулятор закрылся.");
     }
 
-    private static void showResult(Double result) {
+    private static void showResult(double result) {
         String stringFormat = (result % 1 == 0) ? "%.0f\n" : "%.3f\n";
         System.out.printf("Результат: " + stringFormat, result);
     }
