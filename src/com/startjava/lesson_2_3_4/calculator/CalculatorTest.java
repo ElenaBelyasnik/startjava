@@ -13,8 +13,7 @@ public class CalculatorTest {
                 System.out.println("Введите математическое выражение: ");
                 String expression = console.nextLine();
                 try {
-                    Calculator.initCalculator(expression);
-                    showResult(Calculator.calculate());
+                    showResult(Calculator.calculate(expression));
                 } catch (RuntimeException e) {
                     System.out.println("!!!" + e.getMessage());
                 }

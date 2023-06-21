@@ -7,6 +7,8 @@ public class Player {
     private final String name;
     private final int[] numbers = new int[CAPACITY];
     private int attempt;
+    private int score;
+    private boolean isWinner = false;
 
     public Player(String name) {
         this.name = name;
@@ -21,14 +23,32 @@ public class Player {
     }
 
     public void addNumber(int number) {
-        if (attempt < CAPACITY) {
-            numbers[attempt] = number;
+        if (number > 0 && number <= GuessNumber.MAX_VALUE) {
+            if (attempt < CAPACITY) {
+                numbers[attempt] = number;
+                attempt++;
+            }
         }
-        attempt++;
     }
 
     public int getAttempt() {
         return attempt;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public boolean isWinner() {
+        return isWinner;
+    }
+
+    public void setWinner(boolean winner) {
+        isWinner = winner;
     }
 
     public void clear() {

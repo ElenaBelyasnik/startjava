@@ -5,78 +5,120 @@ import java.util.Scanner;
 
 public class GuessNumber {
     private static final Scanner console = new Scanner(System.in);
-    private static final int MAX_VALUE = 100;
-    private final Player player1;
-    private final Player player2;
+    public static final int MAX_VALUE = 100;
+    public static final int MAX_ROUNDS = 3;
+    private final Player[] players;
     private boolean isWin;
+    private int rounds;
 
-    public GuessNumber(Player player1, Player player2) {
-        this.player1 = player1;
-        this.player2 = player2;
+    public GuessNumber(Player... players) {
+        this.players = players;
         this.isWin = false;
+        this.rounds = 0;
     }
 
     public void play() {
-        player1.clear();
-        player2.clear();
-        analyzeNumber();
+        rounds = 0;
+        drawLots();
+        clearWinner();
+        while (rounds < MAX_ROUNDS) {
+            rounds++;
+            isWin = false;
+            System.out.println("РАУНД " + rounds);
+            for (Player player : players) {
+                player.clear();
+            }
+            analyzeNumber();
+        }
+        findWinner();
+        showWinner();
+    }
+
+    private void drawLots() {
+        Random rnd = new Random();
+        int length = players.length;
+        for (int i = length - 1; i >= 0; i--) {
+            int j;
+            j = rnd.nextInt(i + 1);
+            Player tempPlayer = players[i];
+            players[i] = players[j];
+            players[j] = tempPlayer;
+        }
     }
 
     private void analyzeNumber() {
         Random rnd = new Random();
         int secretNumber = rnd.nextInt(MAX_VALUE) + 1;
-        Player currentPlayer = player1;
+        Player currentPlayer = players[0];
         while (isGameNotOver()) {
             int currentNumber = inputNumber(currentPlayer);
             checkNumber(currentPlayer, secretNumber, currentNumber);
             currentPlayer = changePlayer(currentPlayer);
         }
-        printAttempts(player1);
-        printAttempts(player2);
         if (!isWin) {
             System.out.println("Никто из игроков не угадал число.");
         }
     }
 
     private void checkNumber(Player currentPlayer, int secretNumber, int currentNumber) {
-        if (currentNumber > secretNumber) {
-            System.out.println("Число " + currentNumber
-                    + " больше того, что загадал компьютер (" + secretNumber + ")");
-        } else if (currentNumber < secretNumber) {
-            System.out.println("Число " + currentNumber
-                    + " меньше того, что загадал компьютер (" + secretNumber + ")");
-        } else {
-            isWin = true;
+        String message = (currentNumber > secretNumber) ? " больше"
+                : (currentNumber < secretNumber) ? " меньше" : "";
+        isWin = currentNumber == secretNumber;
+        if (isWin) {
             System.out.println("Игрок " + currentPlayer.getName() + " угадал число "
                     + currentNumber + " c "
                     + currentPlayer.getAttempt() + " попытки");
+
+            int score = currentPlayer.getScore();
+            currentPlayer.setScore(++score);
+        } else {
+            System.out.println("Число " + currentNumber
+                    + message + " того, что загадал компьютер (" + secretNumber + ")");
         }
     }
 
     private boolean isGameNotOver() {
-        return !isWin && (hasAttempt(player1) || hasAttempt(player2));
+        boolean hasAttempt = false;
+        for (Player player : players) {
+            if (hasAttempt(player)) {
+                hasAttempt = true;
+                break;
+            }
+        }
+        return !isWin && hasAttempt;
     }
 
     private int inputNumber(Player player) {
         System.out.println("Игрок " + player.getName() + " вводит число: ");
         int number = console.nextInt();
-        player.addNumber(number);
+        if (number > 0 && number <= 100) {
+            player.addNumber(number);
+        } else {
+            System.out.println("Введённое число должно быть в полуинтервале (0, 100]");
+            number = inputNumber(player);
+        }
         return number;
     }
 
     public boolean hasAttempt(Player player) {
-        boolean isNotOver = player.getAttempt() < Player.CAPACITY;
-        if (!isNotOver) {
-            System.out.println("У " + player.getName() + " закончились попытки");
-        }
-        return isNotOver;
+//        boolean isNotOver = player.getAttempt() < Player.CAPACITY;
+//        if (!isNotOver) {
+//            System.out.println("У " + player.getName() + " закончились попытки");
+//        }
+        return player.getAttempt() < Player.CAPACITY;
     }
 
     private Player changePlayer(Player player) {
-        if (player == player1) {
-            return player2;
+        int length = players.length;
+        for (int i = 0; i < length; i++) {
+            if (player == players[i]) {
+                if (i == (length - 1)) {
+                    return players[0];
+                }
+                return players[i + 1];
+            }
         }
-        return player1;
+        return players[length - 1];
     }
 
     public void printAttempts(Player player) {
@@ -87,4 +129,37 @@ public class GuessNumber {
         }
         System.out.println();
     }
+
+    private void findWinner() {
+        int maxScore = 0;
+        for (Player player : players) {
+            int playerScore = player.getScore();
+            if (maxScore < playerScore) {
+                maxScore = playerScore;
+            }
+        }
+        for (Player player : players) {
+            if (player.getScore() == maxScore) {
+                player.setWinner(true);
+            }
+        }
+    }
+
+    private void showWinner() {
+        System.out.print("\nПобедители по итогу 3-х раундов: ");
+        for (Player player : players) {
+            if (player.isWinner()) {
+                System.out.print(player.getName() + " ");
+            }
+        }
+        System.out.println();
+    }
+
+    private void clearWinner() {
+        for (Player player : players) {
+            player.setScore(0);
+            player.setWinner(false);
+        }
+    }
+
 }
