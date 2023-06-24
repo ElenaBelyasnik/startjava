@@ -93,30 +93,6 @@ public class GuessNumber {
         return player.getAttempt() < Player.CAPACITY;
     }
 
-/*
-    private Player changePlayer(Player player) {
-        int length = players.length;
-        for (int i = 0; i < length; i++) {
-            if (player == players[i]) {
-                if (i == (length - 1)) {
-                    return players[0];
-                }
-                return players[i + 1];
-            }
-        }
-        return players[length - 1];
-    }
-*/
-
-    public void printAttempts(Player player) {
-        System.out.print("Числа, названные игроком " + player.getName() + ": ");
-        int[] numbers = player.getNumbers();
-        for (int number : numbers) {
-            System.out.print(number + " ");
-        }
-        System.out.println();
-    }
-
     private void findWinner() {
         int maxScore = 0;
         if (isWin) {
