@@ -23,11 +23,17 @@ public class Player {
     }
 
     public void addNumber(int number) {
+        RuntimeException checkNumber =
+                new RuntimeException("Введённое число должно быть в полуинтервале (0, 100]");
         if (number > 0 && number <= GuessNumber.MAX_VALUE) {
             if (attempt < CAPACITY) {
                 numbers[attempt] = number;
                 attempt++;
+            } else {
+                System.out.println("У игрока " + this.name + " закончились попытки");
             }
+        } else {
+            throw checkNumber;
         }
     }
 
@@ -47,8 +53,8 @@ public class Player {
         return isWinner;
     }
 
-    public void setWinner(boolean winner) {
-        isWinner = winner;
+    public void setWinner(boolean isWinner) {
+        this.isWinner = isWinner;
     }
 
     public void clear() {

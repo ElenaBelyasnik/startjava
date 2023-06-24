@@ -23,7 +23,6 @@ public class GuessNumberTest {
 
     private static Player initPlayer() {
         System.out.println("Введите имя игрока: ");
-        String name = console.nextLine();
-        return new Player(name);
+        return new Player(console.nextLine());
     }
 }

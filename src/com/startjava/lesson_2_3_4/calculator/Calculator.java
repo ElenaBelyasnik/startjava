@@ -6,7 +6,7 @@ public class Calculator {
     private static String sign;
 
     public static double calculate(String expression) {
-        initCalculator(expression);
+        init(expression);
         if (isPositive(arg1) && isPositive(arg2)) {
             return switch (sign) {
                 case "+" -> arg1 + arg2;
@@ -24,7 +24,7 @@ public class Calculator {
         return 0;
     }
 
-    public static void initCalculator(String expression) {
+    public static void init(String expression) {
         String[] partsExpression = expression.split(" ");
         try {
             arg1 = Integer.parseInt(partsExpression[0]);
