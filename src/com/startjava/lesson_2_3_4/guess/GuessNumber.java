@@ -8,7 +8,6 @@ public class GuessNumber {
     public static final int MAX_VALUE = 100;
     private static final int MAX_ROUNDS = 3;
     private final Player[] players;
-    private boolean isWin;
     private boolean hasWinner;
 
     public GuessNumber(Player... players) {
@@ -19,15 +18,13 @@ public class GuessNumber {
         drawLots();
         clearWinner();
         for (int i = 1; i <= MAX_ROUNDS; i++) {
-            isWin = false;
             System.out.println("РАУНД " + i);
             for (Player player : players) {
                 player.clear();
             }
-            analyzeNumber();
+            startGameplay();
         }
-        findWinner();
-        showWinner();
+        detectWinner();
     }
 
     private void drawLots() {
@@ -41,25 +38,23 @@ public class GuessNumber {
         }
     }
 
-    private void analyzeNumber() {
+    private void startGameplay() {
         Random rnd = new Random();
         int secretNumber = rnd.nextInt(MAX_VALUE) + 1;
         System.out.println("Число, которое загадал компьютер: " + secretNumber);
-        while (isGameNotOver()) {
+        while (hasAttempt(players[players.length - 1])) {
             for (Player player : players) {
                 inputNumber(player);
-                checkNumber(player, secretNumber);
-                if (!isGameNotOver()) {
-                    break;
+                if (checkNumber(player, secretNumber)) {
+                    return;
                 }
             }
         }
     }
-
-    private void checkNumber(Player currentPlayer, int secretNumber) {
+    private boolean checkNumber(Player currentPlayer, int secretNumber) {
         int currentIndex = currentPlayer.getAttempt() - 1;
-        int currentNumber = currentPlayer.getNumbers()[currentIndex];
-        isWin = currentNumber == secretNumber;
+        int currentNumber = currentPlayer.getNumber(currentIndex);
+        boolean isWin = currentNumber == secretNumber;
         if (isWin) {
             System.out.println("Игрок " + currentPlayer.getName() + " угадал число "
                     + currentNumber + " c "
@@ -72,10 +67,11 @@ public class GuessNumber {
             System.out.println("Число " + currentNumber
                     + message + " того, что загадал компьютер (" + secretNumber + ")");
         }
+        return isWin;
     }
 
-    private boolean isGameNotOver() {
-        return !isWin && hasAttempt(players[players.length - 1]);
+    private boolean hasAttempt(Player player) {
+        return player.getAttempt() < Player.CAPACITY;
     }
 
     private void inputNumber(Player player) {
@@ -83,42 +79,28 @@ public class GuessNumber {
         int number = console.nextInt();
         try {
             player.addNumber(number);
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             System.out.println(e.getMessage());
             inputNumber(player);
         }
     }
 
-    public boolean hasAttempt(Player player) {
-        return player.getAttempt() < Player.CAPACITY;
-    }
-
-    private void findWinner() {
+    private void detectWinner() {
         int maxScore = 0;
-        if (isWin) {
+        if (hasWinner) {
             for (Player player : players) {
                 int playerScore = player.getScore();
                 if (maxScore < playerScore) {
                     maxScore = playerScore;
                 }
             }
+            System.out.print("\nПобедители по итогу 3-х раундов: ");
             for (Player player : players) {
                 if (player.getScore() == maxScore) {
                     player.setWinner(true);
-                }
-            }
-        }
-    }
-
-    private void showWinner() {
-        if (hasWinner) {
-            System.out.print("\nПобедители по итогу 3-х раундов: ");
-            for (Player player : players) {
-                if (player.isWinner()) {
                     System.out.print(player.getName() + " ");
                 }
             }
-            System.out.println();
         } else {
             System.out.println("Никто из игроков не угадал число ни в одном из  раундов.");
         }

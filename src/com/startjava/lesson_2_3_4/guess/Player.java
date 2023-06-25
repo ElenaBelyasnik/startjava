@@ -3,12 +3,12 @@ package com.startjava.lesson_2_3_4.guess;
 import java.util.Arrays;
 
 public class Player {
-    public static final int CAPACITY = 10;
+    public static final int CAPACITY = 1;
     private final String name;
     private final int[] numbers = new int[CAPACITY];
     private int attempt;
     private int score;
-    private boolean isWinner = false;
+    private boolean isWinner;
 
     public Player(String name) {
         this.name = name;
@@ -23,17 +23,14 @@ public class Player {
     }
 
     public void addNumber(int number) {
-        RuntimeException checkNumber =
-                new RuntimeException("Введённое число должно быть в полуинтервале (0, 100]");
-        if (number > 0 && number <= GuessNumber.MAX_VALUE) {
-            if (attempt < CAPACITY) {
-                numbers[attempt] = number;
-                attempt++;
-            } else {
-                System.out.println("У игрока " + this.name + " закончились попытки");
-            }
+        if (number <= 0) {
+            throw new RuntimeException("Введённое число должно быть в полуинтервале (0, 100]");
+        }
+        if (attempt < CAPACITY) {
+            numbers[attempt] = number;
+            attempt++;
         } else {
-            throw checkNumber;
+            System.out.println("У игрока " + this.name + " закончились попытки");
         }
     }
 
@@ -55,6 +52,10 @@ public class Player {
 
     public void setWinner(boolean isWinner) {
         this.isWinner = isWinner;
+    }
+
+    public int getNumber(int index){
+        return numbers[index];
     }
 
     public void clear() {
