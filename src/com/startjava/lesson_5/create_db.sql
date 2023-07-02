@@ -1,6 +1,6 @@
 --psql -U postgres
 --\cd 'C:/ELENA/StartJava/src/com/startjava/lesson_5'
---\ir create_db_.sql
+--\ir 'create_db.sql'
 --==========================================================
 --\c postgres;
 --\c jaegers;
