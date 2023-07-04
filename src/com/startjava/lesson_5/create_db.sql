@@ -5,13 +5,12 @@
 --\c postgres;
 --\c jaegers;
 --DROP TABLE IF EXISTS Jaegers;
-\c postgres;
+\C postgres;
 DROP DATABASE IF EXISTS jaegers;
 CREATE DATABASE jaegers;
-\c jaegers;
-CREATE TABLE Jaegers
-(
-    id        serial primary key,
+\C jaegers;
+CREATE TABLE Jaegers(
+    id        serial PRIMARY KEY,
     modelName text,
     mark      text,
     height    real,
@@ -20,7 +19,6 @@ CREATE TABLE Jaegers
     origin    text,
     launch    date,
     kaijuKill integer
-)
-;
-\ir  'init_db.sql'
-\ir  'queries.sql'
+);
+\ir 'init_db.sql'
+\ir 'queries.sql'
